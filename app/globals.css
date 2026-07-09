@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #07070B;
+  --foreground: #EAEAF4;
+  --surface:    rgba(255, 255, 255, 0.028);
+  --border:     rgba(255, 255, 255, 0.07);
 }
 
 @theme inline {
@@ -12,15 +14,181 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 5px; }
+::-webkit-scrollbar-track        { background: var(--background); }
+::-webkit-scrollbar-thumb        { background: #25254a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: #6366f1; }
+
+/* ── Gradient text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(130deg, #818cf8 0%, #a78bfa 52%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Grid background ────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ── Section surfaces ───────────────────────────────────── */
+.section-alt {
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.018) 0%,
+    rgba(255, 255, 255, 0.012) 100%
+  );
+}
+
+/* ── Portrait placeholder ───────────────────────────────── */
+.portrait-bg {
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 25%, rgba(99, 102, 241, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 65% at 75% 75%, rgba(167, 139, 250, 0.12) 0%, transparent 70%),
+    #0b0b16;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+.card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 60px rgba(99, 102, 241, 0.18),
+    0 6px 20px rgba(0, 0, 0, 0.45);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  background: #4f46e5;
+  box-shadow: 0 0 22px rgba(99, 102, 241, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-primary:hover {
+  background: #4338ca;
+  box-shadow: 0 0 34px rgba(99, 102, 241, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: transparent;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(99, 102, 241, 0.07);
+  transform: translateY(-1px);
+}
+
+/* Button press feedback */
+.btn-primary:active { transform: scale(0.97) translateY(0) !important; }
+.btn-ghost:active   { transform: scale(0.97) translateY(0) !important; }
+
+/* Accessible focus ring */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.55);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ── Skill card accent tops ─────────────────────────────── */
+.skill-card-indigo { border-top: 2px solid rgba(99,  102, 241, 0.5); }
+.skill-card-blue   { border-top: 2px solid rgba(96,  165, 250, 0.5); }
+.skill-card-violet { border-top: 2px solid rgba(167, 139, 250, 0.5); }
+.skill-card-sky    { border-top: 2px solid rgba(56,  189, 248, 0.5); }
+
+/* ── Pulse dots ─────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.65; }
+  70%  { transform: scale(2.4); opacity: 0;    }
+  100% { transform: scale(1);   opacity: 0;    }
+}
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: pulse-ring 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.pulse-green  { background: #34d399; }
+.pulse-amber  { background: #fbbf24; }
+.pulse-violet { background: #a78bfa; }
+.pulse-green::before  { background: #34d399; }
+.pulse-amber::before  { background: #fbbf24; }
+.pulse-violet::before { background: #a78bfa; }
+
+/* ── Roadmap column headers ─────────────────────────────── */
+.roadmap-now    { border-top: 2px solid rgba(52,  211, 153, 0.6); }
+.roadmap-next   { border-top: 2px solid rgba(251, 191,  36, 0.5); }
+.roadmap-later  { border-top: 2px solid rgba(148, 163, 184, 0.3); }
+
+/* ── Hero load animations ───────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1);    }
+  50%       { opacity: 0.6; transform: scale(1.1); }
+}
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(99, 102, 241, 0.22);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.08);
+  }
+  50% {
+    border-color: rgba(167, 139, 250, 0.48);
+    box-shadow: 0 0 50px rgba(167, 139, 250, 0.14);
+  }
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0);  }
+  50%       { transform: translateY(6px); }
+}
+
+/* Staggered hero entrance */
+.h-badge    { animation: fadeIn  0.55s ease 0s    both; }
+.h-line1    { animation: fadeUp  0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both; }
+.h-line2    { animation: fadeUp  0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+.h-line3    { animation: fadeUp  0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both; }
+.h-sub      { animation: fadeUp  0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both; }
+.h-btns     { animation: fadeUp  0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.56s both; }
+.h-portrait { animation: fadeUp  0.9s  cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+
+.animate-ambient      { animation: ambientPulse 6s  ease-in-out infinite; }
+.animate-ambient-slow { animation: ambientPulse 9s  ease-in-out infinite; animation-delay: -4s; }
+.animate-border-glow  { animation: borderGlow   4s  ease-in-out infinite; }
+.animate-scroll       { animation: scrollBounce 2.5s ease-in-out infinite; }
