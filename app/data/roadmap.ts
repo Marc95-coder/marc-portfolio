@@ -9,9 +9,9 @@ export type RoadmapItem = {
 
 export const roadmapItems: RoadmapItem[] = [
   {
-    title: "Application Tracker",
-    description: "Track job applications, contacts, status, and follow-ups in one place. Built for my own job search.",
-    tags: ["Next.js", "PostgreSQL", "Tailwind"],
+    title: "AI Learning Assistant",
+    description: "A personal study companion powered by an LLM that adapts content to my current learning goals.",
+    tags: ["Python", "LangChain", "OpenAI API"],
     phase: "now",
   },
   {
@@ -19,12 +19,6 @@ export const roadmapItems: RoadmapItem[] = [
     description: "Add a proper spaced-repetition algorithm (SM-2), import from Anki, and progress analytics.",
     tags: ["React", "TypeScript", "Algorithms"],
     phase: "now",
-  },
-  {
-    title: "AI Learning Assistant",
-    description: "A personal study companion powered by an LLM that adapts content to my current learning goals.",
-    tags: ["Python", "LangChain", "OpenAI API"],
-    phase: "next",
   },
   {
     title: "Personal Dashboard",
