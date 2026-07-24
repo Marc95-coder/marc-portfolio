@@ -2,7 +2,7 @@ const statusItems = [
   {
     icon: "🎓",
     label: "Status",
-    value: "Computer Science student, Uni Bern — 3rd semester from Sep 2025",
+    value: "Computer Science student, Uni Bern — 3rd semester from Sep 2026",
   },
   {
     icon: "🚀",
